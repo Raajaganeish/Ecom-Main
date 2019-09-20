@@ -1,0 +1,32 @@
+<div class="containar-fluid position">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Author : {{ book.author }}</h6>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <p><b><i>Price : {{ book.price }}</i></b></p>
+
+        <mat-select style="width:150px;" placeholder="Quantity" [(ngModel)]="qty">
+            <mat-option *ngFor="let quantity of qtyList" [value]="quantity">{{ quantity }}</mat-option>
+        </mat-select>
+        <br>
+        <button type="button" name="button" mat-raised-button color="accent" style="margin-top:10px;" (click)="onAddtoCart();" [disabled]="isDisabled">{{ !isDisabled ? 'Add To Cart!' : 'Added To Cart' }}</button>
+      </div>
+      <div class="col-md-3">
+        <img [src]="book.imgPath" alt="" style="width:300px;height:550px">
+      </div>
+    </div>
+
+    </div>
+</div>
+    </div>
+    <!-- <div class="col-md-2">
+      <button type="button" name="button" mat-raised-button color="primary" [matBadge]="bookCount" matBadgePosition="after" matBadgeColor="accent">Cart</button>
+    </div> -->
+  </div>
+</div>

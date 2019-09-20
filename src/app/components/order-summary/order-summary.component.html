@@ -1,0 +1,28 @@
+<mat-progress-bar mode="indeterminate" style="width:100%;color:'red';" *ngIf="!dataLoaded"></mat-progress-bar>
+
+    <div class="card" style="margin-top:5%;margin-left:7%;margin-right:5%;" *ngIf="dataLoaded">
+      <div class="card-header">
+        Orders!
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          <div class="list-group" id="myList" role="tablist">
+            <a href="#{item.id}" class="list-group-item list-group-item-action" data-toggle="list" role="tab" *ngFor="let item of orderList; let i=index">
+              Order Id :   {{ item.orderId }} <br>
+              Ordered on:  {{ item.orderDate }} <br>
+              <ul *ngFor="let books of item.cartItemList; let i=index">
+                Name : {{ books.book.title }} <br>
+                Quantity : {{ books.qty }} <br>
+                Subtotal : {{ books.subTotal }} <br>
+              </ul>
+              Grand Total : {{ item.orderTotal }}
+            </a>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane" id="itemp.id" role="tabpanel" *ngFor="let itemp of orderList; let i=index">
+                {{ itemp.orderId }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

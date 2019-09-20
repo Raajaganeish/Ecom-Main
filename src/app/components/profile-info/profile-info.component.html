@@ -1,0 +1,192 @@
+<p>
+  profile-info works!
+  Logged User is {{ user.username }}
+</p>
+
+
+<div class="container">
+  <mat-card class="shadow">
+
+
+    <mat-tab-group >
+      <mat-tab label="Profile Edit">
+
+
+        <form class="form-group" (ngSubmit)="updateProfile(temp)" #temp="ngForm">
+
+          <input type="hidden" name="id" [(ngModel)]="user.id">
+
+          <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+            <input type="text" name="firstName" placeholder="First Name" matInput [(ngModel)]="user.firstname">
+          </mat-form-field>
+
+          <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+            <input type="text" name="lastName" placeholder="Last Name" matInput [(ngModel)]="user.lastname">
+          </mat-form-field>
+          <br>
+
+          <mat-form-field style="margin-left: 25px;margin-top: 20px;width:35rem;">
+            <input type="text" name="username" placeholder="User Name" matInput [(ngModel)]="user.username" required disabled>
+          </mat-form-field>
+
+          <br>
+          <mat-form-field style="margin-left: 25px;margin-top: 20px;width:35rem;">
+            <input type="text" name="email" placeholder="Email!!" matInput [(ngModel)]="user.email" email required>
+          </mat-form-field>
+
+          <br>
+          <mat-form-field style="margin-left: 25px;margin-top: 20px;width:35rem;">
+            <input type="text" name="phone" placeholder="Phone!!" matInput [(ngModel)]="user.phone">
+          </mat-form-field>
+          <br>
+          <button type="submit" name="button" mat-raised-button color="primary" style="margin-left:25px;">Update!!!</button>
+
+        </form>
+
+
+      </mat-tab>
+
+      <mat-tab label="Payment">
+        <p *ngIf="defaultPaymentSelected">Default payment is Selected!!!</p>
+        <br>
+        <mat-tab-group [selectedIndex]="tabIndex" (selectedIndexChange)="selectedBillingChange($event)">
+          <mat-tab label="List of CardDetais">
+              <form (ngSubmit)="setDefaultPayment()">
+                <table class="table table-stripped">
+                  <thead>
+                    <th scope="col">Default</th>
+                    <th scope="col">CardName</th>
+                    <th scope="col">Actions</th>
+                  </thead>
+                  <tr *ngFor="let item of PaymentList; let i=index">
+                    <td>
+                      <!-- <input type="radio" name="PaymentId" [value]="item.id" [(ngModel)]="defaultPaymentId">{{ item.default }} -->
+                      <mat-slide-toggle
+                          class="example-margin"
+                          name="slider" [checked]="item.default"
+                          #slider (change)="defaultChanged($event,item)">
+                          <!-- (change)="defaultChanged($event,item.default)" -->
+
+                          <span *ngIf="slider.checked">Default</span>
+                      </mat-slide-toggle>
+                    </td>
+                    <td>
+                      {{ item.cardName }}
+                    </td>
+                    <td>
+                      <a style="cursor:pointer;" (click)="onUpdate(item)">Update</a>  <a style="cursor:pointer;margin-left:25px;" (click)="onDelete(item.id)">Delete</a>
+                    </td>
+                  </tr>
+                </table>
+                <button type="submit" name="button" mat-raised-button color="warn" style="margin-left:15px;">Save!!</button>
+              </form>
+
+            </mat-tab>
+            <mat-tab label="Add/Update Payment">
+              <form (ngSubmit)=OnNewPayment()>
+              <mat-card class="shadow">
+                <p><b>Card Details!!!</b></p>
+                <div class="alert alert-success" role="alert" *ngIf="CardDetailsUpdated">
+                          Details Changed Successfully!!
+                </div>
+
+
+                  <input type="hidden" name="id" [value]="userPayment.id">
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <input type="text" name="holderName" placeholder="Holder Name" matInput [(ngModel)]="userPayment.holderName">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <input type="text" name="cardNumber" placeholder="Card Number" matInput [(ngModel)]="userPayment.cardNumber">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <mat-select [(ngModel)]="userPayment.cardName" name="cardName" required placeholder="--CardName--">
+                      <mat-option *ngFor="let item of cardType; let i=index" [value]="item">
+                        {{item}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <mat-select [(ngModel)]="userPayment.cardType" name="cardType" required placeholder="--CardType--">
+                      <mat-option value="debit">Debit</mat-option>
+                      <mat-option value="credit">Credit</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <mat-select [(ngModel)]="userPayment.expiryDate" name="expDate" placeholder="Exp-Date">
+                                        <mat-option value="1">Jan (01)</mat-option>
+                                        <mat-option value="2">Feb (02)</mat-option>
+                                        <mat-option value="3">Mar (03)</mat-option>
+                                        <mat-option value="4">Apr (04)</mat-option>
+                                        <mat-option value="5">May (05)</mat-option>
+                                        <mat-option value="6">Jun (06)</mat-option>
+                                        <mat-option value="7">July (07)</mat-option>
+                                        <mat-option value="8">Aug (08)</mat-option>
+                                        <mat-option value="9">Sep (09)</mat-option>
+                                        <mat-option value="10">Oct (10)</mat-option>
+                                        <mat-option value="11">Nov (11)</mat-option>
+                                        <mat-option value="12">Dec (12)</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <mat-select [(ngModel)]="userPayment.expiryMonth" name="expMonth" placeholder="Exp-Month">
+                      <mat-option value="2015">2015</mat-option>
+                      <mat-option value="2017">2017</mat-option>
+                      <mat-option value="2018">2018</mat-option>
+                      <mat-option value="2019">2019</mat-option>
+                      <mat-option value="2020">2020</mat-option>
+                      <mat-option value="2021">2021</mat-option>
+                      <mat-option value="2022">2022</mat-option>
+                      <mat-option value="2023">2023</mat-option>
+                      <mat-option value="2024">2024</mat-option>
+                      <mat-option value="2025">2025</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+
+                  <mat-form-field style="margin-left: 25%;margin-top: 20px;width:20rem;">
+                    <input type="text" name="ccv" placeholder="CCV Number" matInput [(ngModel)]="userPayment.ccv">
+                  </mat-form-field>
+
+              </mat-card>
+
+
+              <br>
+              <mat-card class="shadow">
+                <p><b>Billing Address!!</b></p>
+
+					<input type="hidden" name="id" [value]="userBilling.id">
+                    <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                        <input type="text" name="AddSt1" placeholder="Street 1" matInput [(ngModel)]="userBilling.addressName">
+                    </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <input type="text" name="AddSt1" placeholder="Street 1" matInput [(ngModel)]="userBilling.addressSt1">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <input type="text" name="AddSt2" placeholder="Street 2 Dt." matInput [(ngModel)]="userBilling.addressSt2">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <input type="text" name="AddCity" placeholder="State" matInput [(ngModel)]="userBilling.addressCity">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <input type="text" name="AddCountry" placeholder="Country" matInput [(ngModel)]="userBilling.addressCountry">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                    <input type="text" name="AddZipCode" placeholder="Pin Code" matInput [(ngModel)]="userBilling.addressZipCode">
+                  </mat-form-field>
+                  <button type="submit" name="button" mat-raised-button color="warn">Save</button>
+
+
+              </mat-card>
+            </form>
+
+            </mat-tab>
+          </mat-tab-group>
+      </mat-tab>
+      <mat-tab label="Orders"> Content 2 </mat-tab>
+    </mat-tab-group>
+
+
+
+  </mat-card>
+</div>

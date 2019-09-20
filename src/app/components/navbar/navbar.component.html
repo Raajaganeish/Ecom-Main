@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg" style="background-color:white;">
+  <div class="navbar-header">
+    <a class="navbar-brand" routerLink="/home"><h1 style="color:black;">BOOK STORE</h1></a>
+  </div>
+  <div class="navbar-nav">
+    <a routerLink="/myProfile" class="nav-item nav-link pointer" style="color:black;">Books <span class="sr-only">(current)</span></a>
+    <!-- <a class="nav-item nav-link">Features</a> -->
+    <!-- (input)="onInput($event)" -->
+  </div>
+  <form (ngSubmit)="onSubmit()" #SearchTitle="ngForm" style="margin-top:10px;margin-left:15px;">
+    <div class="row">
+      <div class="form-group">
+        <input class="form-control" type="text" name="SearchByTitle" value="" placeholder="Book Name" ngModel required>
+      </div>
+      <button type="submit" name="button" style="margin-left:15px; max-height:40px;" mat-raised-button [disabled]="!tForm.valid">Search</button>
+    </div>
+  </form>
+
+<!-- [matBadge]="count" matBadgePosition="above after" matBadgeColor="accent" -->
+
+  <span class="ml-auto"></span>
+    <a *ngIf="!loggedIn"style="cursor:pointer;" class="nav-item nav-link" (click)="onLogin()">Login</a>
+    <a *ngIf="loggedIn" style="cursor:pointer;" class="nav-item nav-link" routerLink="/myProfile/cart">
+    <span>Cart</span></a>
+    <a *ngIf="loggedIn" style="cursor:pointer;" class="nav-item nav-link">MyAccount</a>
+    <a *ngIf="loggedIn" style="cursor:pointer;" class="nav-item nav-link" routerLink="/myProfile/profileInfo">MyProfile</a>
+    <a *ngIf="loggedIn" style="cursor:pointer;" class="nav-item nav-link" (click)="onLogout()">Logout</a>
+
+
+</nav>

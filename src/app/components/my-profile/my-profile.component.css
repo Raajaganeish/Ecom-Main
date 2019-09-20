@@ -1,0 +1,12 @@
+.position
+{
+  flex: 1 1 auto;
+}
+
+.shadow
+{
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-top: 2rem;
+  box-shadow: 30px 30px 30px black;
+}

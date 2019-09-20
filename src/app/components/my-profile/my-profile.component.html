@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-3">
+    <p>Books!!!!</p>
+  </div>
+  <!-- <div class="col-md-2 offset-md-7">
+    <button type="button" name="button" mat-raised-button color="primary" [matBadge]="bookCount" matBadgePosition="after" matBadgeColor="accent">Cart</button>
+  </div> -->
+</div>
+
+<!-- <mat-card class="shadow" *ngFor="let item of bookList; let i=index;">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card-title>{{ item.title }}	</mat-card-title>
+      <mat-card-subtitle>{{ item.author }}	</mat-card-subtitle>
+      <mat-card-content>
+        Category : {{ item.category }} <br>
+        Date :     {{ item.dop }} <br>
+        Pages:     {{ item.pages }} <br>
+        Price:     {{ item.price }} <br>
+    	 </mat-card-content>
+       <mat-card-actions>
+         <button type="button" name="button" mat-raised-button color="secondary" (click)="onAddtoCart($event,b1)" #b1>Add To Cart</button>
+  </mat-card-actions>
+
+    </div>
+    <div class="col-md-4 offset-md-4">
+      <img mat-card-image [src]="item.imgPath" style="height:400px;">
+    </div>
+  </div>
+</mat-card> -->
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <table class="table" [mfData]="bookList | dataFilter : filterQuery" #mf="mfDataTable">
+      <thead>
+        <th colspan="9">
+          <div class="row">
+            <div class="col-md-5">
+              <mat-form-field >
+                <input type="text" name="firstName" placeholder="Name" matInput [(ngModel)]="filterQuery">
+              </mat-form-field>
+            </div>
+          </div>
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of mf.data; let i=index">
+          <a (click)="onSelectBook(item)" style="cursor:pointer;">
+            <mat-card>
+            <div class="row">
+              <div class="col-md-7">
+                <mat-card-header>
+                  <div mat-card-avatar style="background-image:item.imgPath"></div>
+                  <mat-card-title>{{ item.title }}</mat-card-title>
+                  <mat-card-subtitle>{{ item.author }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    Category : {{ item.category }} <br>
+                    Date :     {{ item.dop }} <br>
+                    Vol  :     {{ item.vol }} <br>
+                    Pages:     {{ item.pages }} <br>
+                    Price:     {{ item.price }} <br>
+                  </p>
+                </mat-card-content>
+              </div>
+
+              <div class="col-md-3">
+                <img mat-card-image [src]="item.imgPath" alt="item.title" style="height:350px;width:275px;">
+              </div>
+            </div>
+            </mat-card>
+
+            
+
+
+          </a>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

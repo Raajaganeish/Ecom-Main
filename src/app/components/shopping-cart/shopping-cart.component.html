@@ -1,0 +1,46 @@
+<hr>
+
+<mat-card class="position">
+
+  <div class="row" *ngFor="let cartItem of cartItemList; let i=index">
+    <div class="col-md-1 col-sm-1">
+      <p>{{ cartItem.id }}</p>
+    </div>
+    <div class="col-md-1 col-sm-1">
+      <img [src]="cartItem.book.imgPath" alt="" style="height:60px;width:40px;">
+    </div>
+    <div class="col-md-3 col-sm-3">
+      <p><b>{{ cartItem.book.title }}</b></p>
+    </div>
+    <div class="col-md-1 col-sm-1">
+      <mat-form-field>
+        <mat-select placeholder="Quantity" [(ngModel)]="cartItem.qty">
+            <mat-option *ngFor="let quantity of qtyList" [value]="quantity">{{ quantity }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-1 col-sm-1" style="margin-left:10rem;">
+      <p><b>₹ {{ cartItem.subTotal }}</b></p>
+    </div>
+    <div class="col-md-3 col-sm-3">
+      <!-- <button type="button" name="button" mat-raised-button color="primary" (click)="onUpdate(cartItem)">Update</button> -->
+      <a (click)="onUpdate(cartItem)" style="cursor:pointer;">Update</a>
+      <!-- <button type="button" name="button" mat-raised-button color="warn" style="margin-left:10px;" (click)="onDelete(cartItem.id)">Remove</button> -->
+      <a (click)="onDelete(cartItem.id)" style="cursor:pointer;margin-left:10px;">Delete</a>
+    </div>
+    <br>
+  </div>
+
+</mat-card>
+<div class="row" style="margin-top:25px;">
+  <div class="offset-md-8">
+    <p><b>₹ {{ shoppingCart.grandTotoal }}</b></p>
+  </div>
+  <div class="col-md-1" style="margin-left:5px;">
+    <button type="button" name="button" mat-raised-button color="accent" routerLink="/myProfile/order">Buy!!</button>
+  </div>
+  <div class="col-md-1" style="margin-left:5px;">
+    <button type="button" name="button" mat-raised-button color="accent" (click)="DeleteAll()">Delete All</button>
+  </div>
+</div>

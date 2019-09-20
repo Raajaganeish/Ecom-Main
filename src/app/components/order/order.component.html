@@ -1,0 +1,162 @@
+<mat-progress-bar mode="indeterminate" style="width:100%;color:'red';" *ngIf="orderPlaced"></mat-progress-bar>
+
+
+  <div class="row" style="margin-left:15px;">
+    <div class="col-md-3 col-sm-2 col-xs-1">
+      <div class="card">
+        <div class="card-header">
+          Place Your Order!
+        </div>
+        <div class="card text-left">
+          <div class="card-body">
+            <div class="card-title">
+              Order bill <span><b>₹  {{ sc.grandTotoal }}</b></span>
+            </div>
+            <div class="card-text">
+              Tax : ₹ {{ sc.grandTotoal*0.06 | number : '1.2-2' }}
+            </div>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent border-success">Total ₹  {{ sc.grandTotoal*1.06 | number : '1.2-2'}}</div>
+        </div>
+    </div>
+
+    <div class="col-md-8 col-sm-8 col-xs-8">
+      <div class="card">
+        <div class="card-header">
+          Payment Procedure!
+        </div>
+        <mat-vertical-stepper>
+            <mat-step>
+              <mat-slide-toggle (change)="onChange(slider)" #slider [disabled]="!loaded">Use Default Payment Card Details!</mat-slide-toggle>
+              <ng-template matStepLabel>Card Details</ng-template>
+
+              <form #paymentForm=ngForm>
+              <input type="hidden" name="id" [value]="payment.id">
+              <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                <input type="text" name="holderName" placeholder="Holder Name" matInput [(ngModel)]="payment.holderName">
+              </mat-form-field>
+              <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                <input type="text" name="cardNumber" placeholder="Card Number" matInput [(ngModel)]="payment.cardNumber" required>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                <mat-select [(ngModel)]="payment.cardName" name="cardName"  placeholder="--CardName--" required>
+                  <mat-option *ngFor="let item of cardType; let i=index" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                <mat-select [(ngModel)]="payment.cardType" name="cardType" required placeholder="--CardType--">
+                  <mat-option value="debit">Debit</mat-option>
+                  <mat-option value="credit">Credit</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                <mat-select [(ngModel)]="payment.expiryDate" name="expDate" placeholder="Exp-Date" required>
+                <!-- [disabled]="defaultSet" -->
+                                    <mat-option value="1">Jan (01)</mat-option>
+                                    <mat-option value="2">Feb (02)</mat-option>
+                                    <mat-option value="3">Mar (03)</mat-option>
+                                    <mat-option value="4">Apr (04)</mat-option>
+                                    <mat-option value="5">May (05)</mat-option>
+                                    <mat-option value="6">Jun (06)</mat-option>
+                                    <mat-option value="7">July (07)</mat-option>
+                                    <mat-option value="8">Aug (08)</mat-option>
+                                    <mat-option value="9">Sep (09)</mat-option>
+                                    <mat-option value="10">Oct (10)</mat-option>
+                                    <mat-option value="11">Nov (11)</mat-option>
+                                    <mat-option value="12">Dec (12)</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                <mat-select [(ngModel)]="payment.expiryMonth" name="expMonth" placeholder="Exp-Month" required>
+                  <mat-option value="2015">2015</mat-option>
+                  <mat-option value="2017">2017</mat-option>
+                  <mat-option value="2018">2018</mat-option>
+                  <mat-option value="2019">2019</mat-option>
+                  <mat-option value="2020">2020</mat-option>
+                  <mat-option value="2021">2021</mat-option>
+                  <mat-option value="2022">2022</mat-option>
+                  <mat-option value="2023">2023</mat-option>
+                  <mat-option value="2024">2024</mat-option>
+                  <mat-option value="2025">2025</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+
+              <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                <input type="text" name="ccv" placeholder="CCV Number" matInput [(ngModel)]="payment.ccv" required>
+              </mat-form-field>
+              <br>
+              <button mat-raised-button matStepperNext color="primary" [disabled]="!paymentForm.valid">Next</button>
+
+              </form>
+
+
+            </mat-step>
+            <mat-step>
+
+              <ng-template matStepLabel>Billing Address</ng-template>
+              <mat-slide-toggle (change)="onChangeAddress(slider2)" #slider2 [disabled]="!loaded">Use Default ShippingAddress </mat-slide-toggle>
+              <form #shippingAddForm=ngForm>
+
+                <input type="hidden" name="id" [value]="shippingAddress.id">
+                          <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                              <input type="text" name="AddSt1" placeholder="Street 1" matInput [(ngModel)]="shippingAddress.shippingAddressName" >
+                          </mat-form-field>
+                        <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                          <input type="text" name="AddSt1" placeholder="Street 1" matInput [(ngModel)]="shippingAddress.shippingAddressSt1">
+                        </mat-form-field>
+                        <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                          <input type="text" name="AddSt2" placeholder="Street 2 Dt." matInput [(ngModel)]="shippingAddress.shippingAddressSt2">
+                        </mat-form-field>
+                        <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                          <input type="text" name="AddCity" placeholder="State" matInput [(ngModel)]="shippingAddress.shippingAddressCity" required>
+                        </mat-form-field>
+                        <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                          <input type="text" name="AddCountry" placeholder="Country" matInput [(ngModel)]="shippingAddress.shippingAddressCountry" required>
+                        </mat-form-field>
+                        <mat-form-field style="margin-left: 25px;margin-top: 20px;width:20rem;">
+                          <input type="text" name="AddZipCode" placeholder="Pin Code" matInput [(ngModel)]="shippingAddress.shippingAddressZipCode" required>
+                        </mat-form-field>
+                        <br>
+                        <button mat-raised-button matStepperNext color="primary" [disabled]="!shippingAddForm.valid">Next</button>
+
+
+              </form>
+
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Verify !</ng-template>
+              <div class="row">
+                <table class="table">
+                                  <caption>List of Books</caption>
+                                  <thead>
+                                  <tr>
+                                  <th scope="col">Id</th>
+                                  <th scope="col">Cover</th>
+                                  <th scope="col">Price</th>
+                                  <th scope="col">Qty</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let ctItem of cartItemList; let i=index">
+                                            <th scope="row">{{ ctItem.id }}</th>
+                                            <td><img [src]="ctItem.book.imgPath" alt="" style="width:50px;height:60px;"></td>
+                                            <td>Rs. {{ ctItem.subTotal }}</td>
+                                            <td>{{ ctItem.qty }}</td>
+                                    </tr>
+                                  </tbody>
+                </table>
+                <button type="button" name="button"style="width:100%" class="btn btn-success" (click)="onPayment()" [disabled]="!(paymentForm.valid && shippingAddForm.valid)">Payment!!</button>
+                <button type="button" name="button"style="width:100%" class="btn btn-danger" routerLink="/myProfile/cart">Back To Cart!!</button>
+
+              </div>
+
+            </mat-step>
+        </mat-vertical-stepper>
+      </div>
+    </div>
+  </div>
