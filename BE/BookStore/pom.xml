@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.Angular</groupId>
 	<artifactId>BookStore</artifactId>
@@ -67,18 +68,18 @@
 			<version>5.0.0.RC1</version>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-web</artifactId>
-		<version>5.1.7.RELEASE</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.1.7.RELEASE</version>
 		</dependency>
-		
-<!-- 		<dependency> -->
-<!-- 			<groupId>biz.paluch.redis</groupId> -->
-<!-- 			<artifactId>lettuce</artifactId> -->
-<!-- 			<version>4.3.1.Final</version> -->
-<!-- 		</dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>biz.paluch.redis</groupId> -->
+		<!-- <artifactId>lettuce</artifactId> -->
+		<!-- <version>4.3.1.Final</version> -->
+		<!-- </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session -->
 		<dependency>
@@ -93,34 +94,42 @@
 			<version>20090211</version>
 		</dependency>
 
-			<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
-			<dependency>
-			    <groupId>org.thymeleaf</groupId>
-			    <artifactId>thymeleaf</artifactId>
-			    <version>3.0.11.RELEASE</version>
-			</dependency>
-			
-			<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-context-support</artifactId>
-		    <version>5.1.8.RELEASE</version>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+			<version>3.0.11.RELEASE</version>
 		</dependency>
-			
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.1.8.RELEASE</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
 
 	</dependencies>
-	
+
 	<dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.session</groupId>
-      <artifactId>spring-session-bom</artifactId>
-      <version>Bean-SR3</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
-  </dependencies>
-</dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.session</groupId>
+				<artifactId>spring-session-bom</artifactId>
+				<version>Bean-SR3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
